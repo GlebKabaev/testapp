@@ -1,0 +1,17 @@
+<h1>Добро пожаловать в мое приложение</h1>
+
+<% if user_signed_in? %>
+  <p>Привет, <%= current_user.email %>!</p>
+  
+  <% if current_user.profile.present? %>
+    <%= link_to 'Редактировать профиль', edit_profile_path(current_user.profile) %>
+    <%= link_to 'Все профили', profiles_path %>
+  <% else %>
+    <%= link_to 'Создать профиль', new_profile_path %>
+  <% end %>
+
+  <%= button_to 'Выйти', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Регистрация', new_user_registration_path %> |
+  <%= link_to 'Вход', new_user_session_path %>
+<% end %>
