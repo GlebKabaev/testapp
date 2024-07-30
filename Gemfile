@@ -68,3 +68,9 @@ end
 
 
 gem "devise", "~> 4.9"
+
+gem 'carrierwave', '~> 3.0'
+gem "mini_magick", "~> 4.13"
+
+gem 'jquery-rails'
+gem 'fancybox-rails'

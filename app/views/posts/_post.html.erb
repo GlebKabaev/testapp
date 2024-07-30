@@ -1,0 +1,22 @@
+<div id="<%= dom_id post %>">
+  <p>
+    <strong>User:</strong>
+    <%= post.user_id %>
+    
+  </p>
+
+  <p>
+  
+  <% if post.picture? %>
+    <a href="<%= post.picture.url %>" data-fancybox="gallery">
+      <%= image_tag post.picture.thumb.url %>
+    </a>
+  <% end %>
+</p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= post.description %>
+  </p>
+
+</div>

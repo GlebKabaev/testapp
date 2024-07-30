@@ -50,11 +50,13 @@ class ProfilesController < ApplicationController
 
   # DELETE /profiles/1 or /profiles/1.json
   def destroy
-    @profile.destroy!
+    if @profile.id== current_user.id
+      @profile.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to profiles_url, notice: "Profile was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to profiles_url, notice: "Profile was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 

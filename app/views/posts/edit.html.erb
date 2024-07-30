@@ -1,0 +1,12 @@
+<h1>Editing post</h1>
+<% if @post.user_id == current_user.id %>
+  <%= render "form", post: @post %>
+<%else%>
+Error its not your profile
+<%end%>
+<br>
+
+<div>
+  <%= link_to "Show this post", @post %> |
+  <%= link_to "Back to posts", posts_path %>
+</div>

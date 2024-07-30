@@ -6,6 +6,7 @@
   <% if current_user.profile.present? %>
     <%= link_to 'Редактировать профиль', edit_profile_path(current_user.profile) %>
     <%= link_to 'Все профили', profiles_path %>
+    <%= link_to 'All posts', posts_path %>
   <% else %>
     <%= link_to 'Создать профиль', new_profile_path %>
   <% end %>
