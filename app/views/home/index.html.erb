@@ -1,8 +1,11 @@
 <h1>Добро пожаловать в мое приложение</h1>
 
 <% if user_signed_in? %>
-  <p>Привет, <%= current_user.email %>!</p>
-  
+<% if current_user.profile==nil %>
+  <p>Привет, Lets create your profile!</p>
+  <% else %>
+<p>Привет, <%= @profile.firstname %>!</p>
+<% end%>
   <% if current_user.profile.present? %>
     <%= link_to 'Редактировать профиль', edit_profile_path(current_user.profile) %>
     <%= link_to 'Все профили', profiles_path %>

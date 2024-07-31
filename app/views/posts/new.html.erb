@@ -1,7 +1,10 @@
 <h1>New post</h1>
-
-<%= render "form", post: @post %>
-
+<%if current_user.profile!=nil%>
+  <%= render "form", post: @post %>
+  <%else%>
+<%="Error,profile is not found"%>
+<%= link_to 'Создать профиль', new_profile_path %>
+<%end%>
 <br>
 
 <div>

@@ -1,14 +1,12 @@
 <div id="<%= dom_id profile %>">
-  <p>
-    <strong>User:</strong>
-    <%= profile.user_id %>
+  
+   <p>
+    <% if profile.picture? %>
+      <a href="<%= profile.picture.url %>" data-fancybox="gallery">
+        <%= image_tag profile.picture.avatar.url %>
+      </a>
+    <% end %>
   </p>
-
-  <p>
-    <strong>Picture:</strong>
-    <%= profile.picture %>
-  </p>
-
   <p>
     <strong>Firstname:</strong>
     <%= profile.firstname %>

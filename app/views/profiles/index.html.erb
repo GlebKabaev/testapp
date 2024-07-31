@@ -20,7 +20,9 @@
     <% @profiles.each do |profile| %>
       <tr>
         
-        <td><%= profile.picture %></td>
+        <td><a href="<%= profile.picture.url %>" data-fancybox="gallery">
+        <%= image_tag profile.picture.avatar.url %>
+      </a></td>
         <td><%= profile.firstname %></td>
         <td><%= profile.lastname %></td>
         <td><%= link_to 'Show', profile %></td>

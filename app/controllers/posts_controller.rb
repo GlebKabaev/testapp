@@ -3,11 +3,13 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.includes(user: :profile).all
+    
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.includes(user: :profile).find(params[:id])
   end
 
   # GET /posts/new

@@ -16,6 +16,9 @@ class PictureUploader < CarrierWave::Uploader::Base
   version :thumb do
     process resize_to_fit: [200, 200]
   end
+  version :avatar do
+    process resize_to_fit: [50, 50]
+  end
 
   # Типы разрешенных файлов
   def extension_allowlist
