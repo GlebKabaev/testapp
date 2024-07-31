@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  
   # GET /posts or /posts.json
   def index
     @posts = Post.includes(user: :profile).all
@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @post = Post.includes(user: :profile).find(params[:id])
+    @comment = Comment.new
   end
 
   # GET /posts/new
