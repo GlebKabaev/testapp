@@ -14,6 +14,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @comment= Post.find(params[:post_id]).comments.build
+    
   end
 
   # GET /comments/1/edit
@@ -54,7 +56,7 @@ class CommentsController < ApplicationController
     @comment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to post_comments_path(Post.find(params[:post_id])), notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end
