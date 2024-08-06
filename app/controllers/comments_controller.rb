@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_post, only: %i[index new create]
   before_action :set_comment, only: %i[show edit update destroy]
-  before_action :set_post_for_update_destroy_show, only: %i[update destroy show]
+  before_action :set_post_for_update_destroy_show_edit, only: %i[update destroy show edit]
   
   def index
     @comments = @post.comments
@@ -34,22 +34,26 @@ class CommentsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to post_comments_path(@post), notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    if @comment.user == current_user
+      respond_to do |format|
+        if @comment.update(comment_params)
+          format.html { redirect_to post_comments_path(@post), notice: 'Comment was successfully updated.' }
+          format.json { render :show, status: :ok, location: @comment }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to post_comments_path(@post), notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
+    if @comment.user == current_user
+      @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to post_comments_path(@post), notice: 'Comment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -63,7 +67,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id] || params.dig(:comment, :post_id))
   end
 
-  def set_post_for_update_destroy_show
+  def set_post_for_update_destroy_show_edit
     @post = @comment.post
   end
 

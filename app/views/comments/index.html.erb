@@ -7,7 +7,9 @@
     <%= render comment %>
     <p>
       <%= link_to "Show this comment", comment %>
-      <%= button_to "Destroy this comment", post_comment_path(comment.post, comment), method: :delete%>
+      <%if comment.user == current_user%>
+        <%= button_to "Destroy this comment", post_comment_path(comment.post, comment), method: :delete%>
+      <%end%>
     </p>
   <% end %>
 </div>
