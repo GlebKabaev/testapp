@@ -4,7 +4,12 @@ Rails.application.routes.draw do
     resources :comments
   end
   get 'home/index'
-  resources :profiles
+  resources :profiles do
+    member do
+      post 'subscribe', to: 'subscriptions#create'
+      delete 'unsubscribe', to: 'subscriptions#destroy'
+    end
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
